@@ -1,0 +1,104 @@
+---
+title: "Ashley's Garmin Dashboard"
+author: "Ashley Lowe"
+date: "12/13/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+Activities <- read_csv("~/workspace/garmin/Activities.csv")
+library(ggplot2)
+library(dplyr)
+library(dygraphs)
+library(xts)
+library(knitr)
+library(stargazer)
+
+Activities$date<-as.POSIXct(Activities$Date,format="%m/%d/%y %H:%M")
+
+Activities$avgpace<-as.numeric(Activities$`Avg Pace`)
+linear<-lm(log(`avgpace`)~Distance+`Avg Run Cadence`+`Avg HR`+`Avg Stride Length`, data = Activities)
+
+```
+
+### Garmin Dashboard Using R Markdown
+I am testing out the various ways I can make a dashboard with R, JS and Python.
+
+##Regressional Anaylsis 
+Regressional Anaylsis shows me that :  
+
+
+* The Econometric model explains 86% of the data.  
+* Distance is not significant in explaining my overall average pace.  
+* Average Run Cadence is significant in my overall average pace. It suggests that for each unit my cadence increase my average pace decreases by .9%  
+* My Average Heart is significant in understanding my overal average pace. It suggests that for unit increase in average heart per minute increases my average pace decreases by .1%.  
+* The Average Stride Length is also significant in my overall average pace. This unit is calculated as a precentage. Therefore, for each 1% increase in Average Stride Length my average pace increases by 39.5%.  
+
+```{r results = "asis"}
+
+
+stargazer::stargazer(linear, type = "html", 
+          title = "Regression results", 
+          header = FALSE,
+          single.row = TRUE)
+
+```
+
+
+
+##Graphical Exploration
+
+### Average Pace with a Predicted Fit
+
+This graph shows my average pace since I got my garmin in 2018. Soon after getting the watch I broke my leg and was in a cast. I stopped running regularly.
+
+When Covid-19 shutdowns began in March 2020 I decided to start a build in training schedule in Garmins App. II completed both a Marathon Training and a half marathon training. 
+
+```{r }
+p <- ggplot(Activities, aes(x=date, y=`Avg Pace`)) +
+     geom_line(color = "#00AFBB", size = .5) + 
+     xlab("") +  theme_minimal()
+p + stat_smooth( color = "#FC4E07", fill = "#FC4E07",)+labs(title="Average Pace Speed in Minutes with Predicted Linear Fit",
+        x ="Since Buying Garmin Watch 2018")
+```
+
+
+
+
+
+```{r }
+p <- ggplot(Activities, aes(x=date, y=`Avg Run Cadence`)) +
+     geom_line(color = "#8142f5", size = .5) + 
+     xlab("") +  theme_minimal()
+p + stat_smooth( color = "#FC4E07", fill = "#FC4E07",)+labs(title="Average Run Cadence with Predicted Linear Fit",
+        x ="Since Buying Garmin Watch 2018")
+```
+
+
+
+
+```{r }
+p <- ggplot(Activities, aes(x=date, y=`Avg HR`)) +
+     geom_line(color = "#FC4E07", size = .5) + 
+     xlab("") +  theme_minimal()
+p + stat_smooth( color = "#326fa8", fill = "#327da8",)+labs(title="Average HR with Predicted Linear Fit",
+        x ="Since Buying Garmin Watch 2018")
+```
+
+```{r }
+p <- ggplot(Activities, aes(x=date, y=`Avg Stride Length`)) +
+     geom_line(color = "#48a832", size = .5) + 
+     xlab("") +  theme_minimal()
+p + stat_smooth( color = "#FC4E07", fill = "#FC4E07",)+labs(title="Average HR with Predicted Linear Fit",
+        x ="Since Buying Garmin Watch 2018")
+```
+
+
+### Summary statistics table 
+
+
+```{r }
+summary(Activities)
+```

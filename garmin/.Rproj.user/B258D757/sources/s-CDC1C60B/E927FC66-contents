@@ -1,0 +1,23 @@
+<html>
+
+<head>
+<title>Ashley's Garmin Dashboard</title>
+</head>
+
+<body>
+
+<p>Testing out different Dashboard Approaches using R, JS and Python. <b>Knit HTML</b> This example if in R.</p>
+
+<!--begin.rcode
+Activities$date<-as.POSIXlt(Activities$Date,format="%m/%d/%y %H:%M")
+summary(Activities)
+end.rcode-->
+
+<p>You can also embed plots, for example:</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+p
+end.rcode-->
+
+</body>
+</html>

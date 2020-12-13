@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1607887143801.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1087215297",
+    "id" : "5EBEE2CC",
+    "lastKnownWriteTime" : 1607894311,
+    "last_content_update" : 1607894311203,
+    "path" : "~/workspace/garmin/garmin/test.Rmd",
+    "project_path" : "test.Rmd",
+    "properties" : {
+        "cursorPosition" : "36,211",
+        "last_setup_crc32" : "CDC1C60B5527c2f",
+        "scrollLine" : "24",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

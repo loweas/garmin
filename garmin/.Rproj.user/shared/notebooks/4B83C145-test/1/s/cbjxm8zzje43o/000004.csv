@@ -1,0 +1,5 @@
+"0","p <- ggplot(Activities, aes(x=date, y=`Avg Stride Length`)) +"
+"0","     geom_line(color = ""#48a832"", size = .5) + "
+"0","     xlab("""") +  theme_minimal()"
+"0","p + stat_smooth( color = ""#FC4E07"", fill = ""#FC4E07"",)+labs(title=""Average HR with Predicted Linear Fit"","
+"0","        x =""Since Buying Garmin Watch 2018"")"

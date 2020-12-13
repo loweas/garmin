@@ -1,0 +1,47 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","library(readr)"
+"0","Activities <- read_csv(""~/workspace/garmin/Activities.csv"")"
+"2","Parsed with column specification:
+cols(
+  .default = col_double(),
+  `Activity Type` = [31mcol_character()[39m,
+  Date = [31mcol_character()[39m,
+  Favorite = [33mcol_logical()[39m,
+  Title = [31mcol_character()[39m,
+  Calories = [32mcol_number()[39m,
+  Time = [34mcol_time(format = """")[39m,
+  `Avg Pace` = [34mcol_time(format = """")[39m,
+  `Best Pace` = [34mcol_time(format = """")[39m,
+  `Elev Gain` = [31mcol_character()[39m,
+  `Elev Loss` = [31mcol_character()[39m,
+  `Avg Ground Contact Time` = [31mcol_character()[39m,
+  `Avg GCT Balance` = [31mcol_character()[39m,
+  Grit = [31mcol_character()[39m,
+  `Climb Time` = [34mcol_time(format = """")[39m,
+  `Bottom Time` = [34mcol_time(format = """")[39m,
+  `Surface Interval` = [34mcol_time(format = """")[39m,
+  Decompression = [31mcol_character()[39m,
+  `Best Lap Time` = [34mcol_time(format = """")[39m
+)
+"
+"2","See spec(...) for full column specifications.
+"
+"2","217 parsing failures.
+row        col   expected   actual                                file
+  1 Climb Time valid date 30:48:00 '~/workspace/garmin/Activities.csv'
+  2 Climb Time valid date 34:14:00 '~/workspace/garmin/Activities.csv'
+  3 Climb Time valid date 45:01:00 '~/workspace/garmin/Activities.csv'
+  5 Climb Time valid date 45:04:00 '~/workspace/garmin/Activities.csv'
+  6 Climb Time valid date 35:55:00 '~/workspace/garmin/Activities.csv'
+... .......... .......... ........ ...................................
+See problems(...) for more details.
+"
+"0","library(ggplot2)"
+"0","library(dplyr)"
+"0","library(dygraphs)"
+"0","library(xts)"
+"0","library(knitr)"
+"0","library(stargazer)"
+"0","Activities$date<-as.POSIXct(Activities$Date,format=""%m/%d/%y %H:%M"")"
+"0","Activities$avgpace<-as.numeric(Activities$`Avg Pace`)"
+"0","linear<-lm(log(`avgpace`)~Distance+`Avg Run Cadence`+`Avg HR`+`Avg Stride Length`, data = Activities)"

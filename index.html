@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Ashley's Garmin Dashboard</title>
+    <link href="css/c3.css" rel="stylesheet"/>
+    <script src="js/d3.js"></script>
+    <script src="js/c3.js"></script>
+
+
+  </head>
+
+  <body>
+    <div id="chart"></div>
+
+
+
+
+  <script>
+
+
+    Promise.all([
+      d3.csv('Activities.csv', d3.autoType),
+      ]).then(function(df) {
+
+
+            console.log(df)
+            var pace =  d3.nest()
+            .key(function(d) {return d.Date;  })
+            .entries(df);
+
+            console.log(pace)
+
+
+        var chart = c3.generate({
+        data: {
+        url: 'Activities.csv',
+        x:'Date',
+        xFormat: '%m/%d/%y %H:%M',
+        columns: 'Avg Pace'
+          },
+        axis: {
+          x: {
+            type: 'timeseries',
+
+        }
+    }
+});
+})
+
+
+
+
+
+  </script>
+  </body>
+  </html>

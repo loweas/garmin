@@ -1,0 +1,19 @@
+
+library(ggplot2)
+library(dplyr)
+library(dygraphs)
+library(xts)
+Activities$date<-as.POSIXlt(Activities$Date,format="%m/%d/%y %H:%M")
+don <- xts(x = Activities$`Avg Pace`, order.by = Activitie$date)
+p <- dygraph(don)
+p
+str(Activities_6_)
+p <- ggplot(Activities_6_, aes(x=date, y=`Avg Pace`)) +
+     geom_line(color = "#00AFBB", size = .5) + 
+     xlab("") +  theme_minimal()
+
+
+p + stat_smooth(
+  color = "#FC4E07", fill = "#FC4E07",
+  method = "loess"
+)
