@@ -19,32 +19,40 @@
   <script>
 
 
-    Promise.all([
-      d3.csv('Activities.csv', d3.autoType),
-      ]).then(function(df) {
+      d3.csv('Activities1.csv',d3.autoType).then(function(data) {
 
 
-            console.log(df)
-            var pace =  d3.nest()
-            .key(function(d) {return d.Date;  })
-            .entries(df);
+        // format the data
+        data.forEach(function(d) {
+          d.date = parseTime(d.date);
+          d.avgpace = +d.avgpace;
+        });
+            console.log(data)
 
-            console.log(pace)
 
 
         var chart = c3.generate({
         data: {
-        url: 'Activities.csv',
-        x:'Date',
-        xFormat: '%m/%d/%y %H:%M',
-        columns: 'Avg Pace'
+        url: 'Activities1.csv',
+        x:'date',
+        xFormat: '%Y-%m-%d %H:%M:%S',
+        rows: 'avgpace'
           },
         axis: {
           x: {
             type: 'timeseries',
-
-        }
-    }
+            tick: {
+                         format: '%Y-%m-%d %H:%M:%S' // how the date is displayed
+                     }
+        },
+        // y : {
+        //     tick : {
+        //         format : function (y) {
+        //             return d3.time.format("%H:%M:%S")(new Date(new Date('01-01-2016 00:00:00').getTime() + (y * 1000)));
+        //         }
+        //     }
+        // }
+    },
 });
 })
 
@@ -53,5 +61,15 @@
 
 
   </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4R5JLJLM4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-K4R5JLJLM4');
+  </script>
+
   </body>
   </html>

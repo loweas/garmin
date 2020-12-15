@@ -44,4 +44,4 @@ See problems(...) for more details.
 "0","library(stargazer)"
 "0","Activities$date<-as.POSIXct(Activities$Date,format=""%m/%d/%y %H:%M"")"
 "0","Activities$avgpace<-as.numeric(Activities$`Avg Pace`)"
-"0","linear<-lm(log(`avgpace`)~Distance+`Avg Run Cadence`+`Avg HR`+`Avg Stride Length`, data = Activities)"
+"0","linear<-lm(log(`avgpace`)~Distance+`Avg Run Cadence`+`Avg HR`+`Avg Stride Length`, data = subset(Activities,`Avg Stride Length`>0 |`Avg HR`>0))"

@@ -19,7 +19,7 @@ library(stargazer)
 Activities$date<-as.POSIXct(Activities$Date,format="%m/%d/%y %H:%M")
 
 Activities$avgpace<-as.numeric(Activities$`Avg Pace`)
-linear<-lm(log(`avgpace`)~Distance+`Avg Run Cadence`+`Avg HR`+`Avg Stride Length`, data = Activities)
+linear<-lm(log(`avgpace`)~Distance+`Avg Run Cadence`+`Avg HR`+`Avg Stride Length`, data = subset(Activities,`Avg Stride Length`>0 |`Avg HR`>0))
 
 ```
 
@@ -60,7 +60,7 @@ When Covid-19 shutdowns began in March 2020 I decided to start a build in traini
 p <- ggplot(Activities, aes(x=date, y=`Avg Pace`)) +
      geom_line(color = "#00AFBB", size = .5) + 
      xlab("") +  theme_minimal()
-p + stat_smooth( color = "#FC4E07", fill = "#FC4E07",)+labs(title="Average Pace Speed in Minutes with Predicted Linear Fit",
+p + stat_smooth( color = "#FC4E07", fill = "#FC4E07",)+labs(title="Average Pace per Mile -- Speed in Minutes -- Predicted Linear Fit",
         x ="Since Buying Garmin Watch 2018")
 ```
 
